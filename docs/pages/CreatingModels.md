@@ -43,6 +43,7 @@ Do the following steps two times:
 
 4) Now the empties can be moved to represent the upper and lower bounds of the object's animation.
    See the example below where the bounds for the cross arm (querausleger) are visible.
+   Remember that Blender's native space is Z-up, right-handed, and Three.js's native space is Y-up, also right-handed.
 
 ![Move limits in Blender](../assets/blenderMoveEmpties.png)
 
@@ -56,6 +57,40 @@ When exporting the model from Blender, make sure the following options are selec
 
 ![Blender export settings](../assets/blenderExport.png)
 
+In particular the Custom Properties have to be included as they contain the topics.
+Also, the +Y UP transformation has to be performed due to the different coordinate systems.
+
 # Import
 
 The model can be imported in the KeepMeAlive3D UI on 'Model', 'Upload'.
+
+# Implementation Details
+
+## Workflow
+
+The frontend handles animations as follows:
+In `DynamicModel` the empties are pulled up in the object hierarchy. The user models them in Blender as children of the
+object to be animated.
+While this is convenient to do in Blender, it creates some problems when processing them.
+When the object is moved/rotated, the empties are also moved/rotated (as they are children). So the positions change.
+Saving the global positions at the start is not an option as another parent might be annotated and change the positions.
+The implemented solution is to drag the empties to the same level as their parents. If another parent is moved, the
+empties will move with it and still the positions can be used to animate the target object as they do not move with the
+target.
+The `Animator` component listens for incoming animation events. As soon as an event arrives, the new target position is
+calculated in `LimitUtils`.
+Finally, the target object is lerped to the target position. To ensure smooth animations, this is done frame by frame.
+
+## Dev Hints
+
+* To facilitate debugging in /src/debug, a custom frontend `Publisher` component can be found.
+  It allows you to emulate moving and rotating events in the frontend (no need for a mqtt publisher).
+  Use it by changing the return value in the `Animator` component to `return Publisher(animationCallback);`.
+  The publisher will call the animation callback directly. The topics must be set manually.
+
+* Coordinates are slightly off in ThreeJS. This can cause problems when rotating or moving objects.
+  The implemented workaround is to round the quaternions to the fourth digit. This can cause problems with very small
+  objects.
+  It was not possible to determine where the offsets were coming from, but this could potentially solve the problem.
+
+* 
