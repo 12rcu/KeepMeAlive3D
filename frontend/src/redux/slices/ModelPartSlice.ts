@@ -2,7 +2,8 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "@/redux/store.ts";
 
 /**
- * Contains all additional meta information about a component
+ * Contains all additional meta information about a component that is processed
+ * by the application.
  */
 export type ComponentInformation = {
   id: number;

@@ -7,7 +7,7 @@ import { fetchAndSetModelSettings } from "@/redux/slices/SettingsSlice.ts";
 import { LoadingSpinner } from "@/components/custom/loading-spinner.tsx";
 import ReplayIndicator from "@/components/custom/replay-indicator.tsx";
 
-function Edit() {
+function ModelLoader() {
   const [modelUrl, setModelUrl] = useState<string | undefined>(undefined);
   const [loading, setLoading] = useState<boolean>(true);
   const { modelId } = useParams();
@@ -52,4 +52,4 @@ function Edit() {
   }
 }
 
-export default Edit;
+export default ModelLoader;

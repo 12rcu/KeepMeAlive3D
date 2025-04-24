@@ -19,12 +19,13 @@ Create an influx db.
 
 Clone the project from GitHub.
 
-### Edit .env files
+### ModelLoader .env files
 
 In order for the front-end to communicate with the back-end, the front-end needs to know the back-end URL to locate
 the endpoints.
 
-Edit the [.env.production](https://github.com/KeepMeAlive3D/KeepMeAlive3D/blob/main/frontend/.env.production) file so
+ModelLoader the [.env.production](https://github.com/KeepMeAlive3D/KeepMeAlive3D/blob/main/frontend/.env.production)
+file so
 that the domain matches the domain you want to deploy to.
 
 ### Build Docker File
@@ -93,5 +94,5 @@ pluginDirs: [ "plugins" ]
 ## Reverse Proxy
 
 As an example we use [nginx-proxy](https://github.com/nginx-proxy/nginx-proxy) to automatically generate lets encrypt
-certificates. We might have to modify the proxy.conf of nginx to allow for larger bodies. Edit this file and add:
+certificates. We might have to modify the proxy.conf of nginx to allow for larger bodies. ModelLoader this file and add:
 `client_max_body_size 200M;` to allow for bodies up to 200mb.
