@@ -40,6 +40,7 @@ function useFilteredWebsocket<Type extends GenericEventMessage>(
   useEffect(() => {
     let websocketConnection: WebSocket | undefined = undefined;
     createWebsocket().then((ws) => {
+      // Create subscription messages
       const subscriptions = topics.current.map((topic) => {
         return {
           manifest: {
@@ -57,6 +58,7 @@ function useFilteredWebsocket<Type extends GenericEventMessage>(
 
       websocketConnection = ws;
 
+      // Subscribe to the topics
       subscriptions.forEach((subscription) => {
         ws.send(JSON.stringify(subscription));
       });
@@ -78,10 +80,12 @@ function useFilteredWebsocket<Type extends GenericEventMessage>(
             description: error.message.message.toString(),
           });
         } else if (msgType === messageType) {
+          // Call callback function with the parsed message
           onMessage(jsonMsg as Type);
         }
       };
     });
+    // Cleanup -> close socket
     return () => {
       websocketConnection?.close();
     };

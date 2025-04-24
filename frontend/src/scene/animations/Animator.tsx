@@ -54,11 +54,10 @@ function Animator() {
       const name = msg.message.topic.split(".").reverse()[0];
 
       if (modelParts.length == 0) {
-        // Skip processing if the model parts are not initialized
+        // Skip processing if the model is not initialized yet
         return;
       }
 
-      // Find the object in the scene by its name
       const selectedObject = state.scene.getObjectByName(name);
 
       if (selectedObject) {
@@ -68,7 +67,7 @@ function Animator() {
           state.scene,
           msg.message.percentage
         );
-        // Store the animation data in the ref
+        // Store the animation data in the ref to be used in the useFrame loop
         animationsRef.current.set(selectedObject, {
           target: localTarget,
           topic: msg.message.topic,
@@ -82,7 +81,6 @@ function Animator() {
     [state.scene, modelParts]
   );
 
-  // Memoize the list of topics to subscribe to for animations
   const topics = useMemo(
     () =>
       modelParts.map((modelPart) => {
@@ -98,7 +96,7 @@ function Animator() {
     animationCallback
   );
 
-  return null; // This component does not render anything
+  return null;
 }
 
 export default Animator;

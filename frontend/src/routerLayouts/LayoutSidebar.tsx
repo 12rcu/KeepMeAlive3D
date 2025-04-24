@@ -2,6 +2,9 @@ import { AppSidebar } from "@/sidebar/AppSidebar.tsx";
 import { SidebarProvider } from "@/components/ui/sidebar.tsx";
 import { Outlet } from "react-router";
 
+/**
+ * Layout that includes the Sidebar
+ */
 function Layout() {
   return (
     <SidebarProvider key="sidebar">

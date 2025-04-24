@@ -13,8 +13,10 @@ function ModelLoader() {
   const { modelId } = useParams();
   const dispatch = useAppDispatch();
   const location = useLocation();
+  // Used to load new model if URL is changed manually
   const refresh = location.state?.refresh;
 
+  // Fetch model and model settings
   useEffect(() => {
     if (modelId !== undefined) {
       setLoading(true);
@@ -28,6 +30,7 @@ function ModelLoader() {
     }
   }, [dispatch, modelId, refresh]);
 
+  // Display loading indicator or if ready, the model
   if (loading) {
     return (
       <div className="flex flex-row items-center justify-center">

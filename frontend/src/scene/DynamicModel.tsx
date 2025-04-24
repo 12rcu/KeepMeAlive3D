@@ -81,6 +81,7 @@ function DynamicModel({ objectUrl }: { objectUrl: string }) {
   };
 
   return (
+    // Manually set the size of the container of the canvas to avoid the bug with the canvas not shrinking on window shrinking
     <div
       style={{
         height: size.height === 0 ? "100%" : `${size.height - 2}px`,

@@ -37,6 +37,7 @@ function MqttGraph({ topic }: { topic: string }) {
         currTime = new Date(lastMsgTime * 1000);
       }
 
+      // Last two minutes messages are shown on start
       const twoMinAgo = currTime.getTime() - 2 * 60 * 1000;
       return current.filter(
         (it) => (it.manifest.timestamp ?? 0) * 1000 > twoMinAgo
@@ -50,6 +51,7 @@ function MqttGraph({ topic }: { topic: string }) {
     dataCallback
   );
 
+  // Fetch last 50 datapoints
   useEffect(() => {
     getEventDataPointsOfTopic(topic).then((it) => {
       setData(it.data);
