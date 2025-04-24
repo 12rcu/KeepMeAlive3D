@@ -6,7 +6,7 @@ import useFilteredWebsocket from "@/hooks/use-filtered-websocket.tsx";
 import { getEventDataPointsOfTopic } from "@/service/model_datapoint.ts";
 import { format } from "date-fns";
 import { useAppSelector } from "@/hooks/hooks.ts";
-import { selectReplay } from "@/slices/ReplaySlice.ts";
+import { selectReplay } from "@/redux/slices/ReplaySlice.ts";
 
 const chartConfig = {
   desktop: {

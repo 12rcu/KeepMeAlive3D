@@ -28,7 +28,7 @@ import {
   ModelInfo,
 } from "@/service/upload.ts";
 import { useAppDispatch } from "@/hooks/hooks.ts";
-import { clearPartsList } from "@/slices/ModelPartSlice.ts";
+import { clearPartsList } from "@/redux/slices/ModelPartSlice.ts";
 import { Link, useNavigate } from "react-router";
 
 export function OpenModel() {

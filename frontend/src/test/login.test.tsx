@@ -1,7 +1,7 @@
 import { describe, expect, it, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
-import Login from "@/Login";
-import store from "@/store";
+import Login from "@/Login/Login.tsx";
+import store from "@/redux/store.ts";
 import { Provider } from "react-redux";
 import { StrictMode } from "react";
 import { ToastProvider } from "@/components/ui/toast";

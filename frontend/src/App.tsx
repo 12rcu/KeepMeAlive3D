@@ -1,9 +1,9 @@
 import "./App.css";
 import Edit from "@/scene/Edit.tsx";
-import GraphView from "@/graphs/GraphView.tsx";
+import GraphView from "@/scene/graphs/GraphView.tsx";
 import { Route, Routes } from "react-router";
-import LayoutSidebar from "@/layout/LayoutSidebar.tsx";
-import LayoutVanilla from "@/layout/LayoutVanilla.tsx";
+import LayoutSidebar from "@/routerLayouts/LayoutSidebar.tsx";
+import LayoutVanilla from "@/routerLayouts/LayoutVanilla.tsx";
 import Help from "@/scene/Help.tsx";
 import { WebSocketProvider } from "@/service/webSocketProvider.tsx";
 

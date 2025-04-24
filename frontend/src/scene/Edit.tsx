@@ -3,7 +3,7 @@ import { Suspense, useEffect, useState } from "react";
 import { downloadModel } from "@/service/upload.ts";
 import { useLocation, useParams } from "react-router";
 import { useAppDispatch } from "@/hooks/hooks.ts";
-import { fetchAndSetModelSettings } from "@/slices/SettingsSlice.ts";
+import { fetchAndSetModelSettings } from "@/redux/slices/SettingsSlice.ts";
 import { LoadingSpinner } from "@/components/custom/loading-spinner.tsx";
 import ReplayIndicator from "@/components/custom/replay-indicator.tsx";
 

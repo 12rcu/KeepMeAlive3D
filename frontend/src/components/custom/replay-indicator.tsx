@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button.tsx";
 import { SkipForward } from "lucide-react";
-import { selectReplay, updateReplay } from "@/slices/ReplaySlice.ts";
+import { selectReplay, updateReplay } from "@/redux/slices/ReplaySlice.ts";
 import { useAppDispatch, useAppSelector } from "@/hooks/hooks.ts";
 import { useEffect, useState } from "react";
 import { format } from "date-fns";

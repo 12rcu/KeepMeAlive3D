@@ -1,15 +1,15 @@
 /* eslint-disable */
 
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import modelPartSlice from "@/slices/ModelPartSlice.ts";
-import settingsSlice from "@/slices/SettingsSlice.ts";
+import modelPartSlice from "@/redux/slices/ModelPartSlice.ts";
+import settingsSlice from "@/redux/slices/SettingsSlice.ts";
 import {
   createStateSyncMiddleware,
   initStateWithPrevTab,
   withReduxStateSync,
 } from "redux-state-sync";
-import replaySlice from "@/slices/ReplaySlice.ts";
-import outlineSlice from "@/slices/OutlineSlice.ts";
+import replaySlice from "@/redux/slices/ReplaySlice.ts";
+import outlineSlice from "@/redux/slices/OutlineSlice.ts";
 
 const store = configureStore({
   reducer: withReduxStateSync(

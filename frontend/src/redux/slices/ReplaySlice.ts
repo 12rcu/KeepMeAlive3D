@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { RootState } from "@/store.ts";
+import { RootState } from "@/redux/store.ts";
 
 interface ReplayState {
   running: boolean;

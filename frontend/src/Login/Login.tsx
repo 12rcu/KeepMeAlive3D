@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { LoginForm } from "@/components/login-form.tsx";
+import { LoginForm } from "@/components/custom/login-form.tsx";
 import { refreshToken } from "@/service/login.ts";
 import { setDefaultRequestToken } from "@/service/service.ts";
 import App from "@/App.tsx";

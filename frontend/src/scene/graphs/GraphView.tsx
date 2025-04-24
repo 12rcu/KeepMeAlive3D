@@ -1,5 +1,5 @@
 import { useAppSelector } from "@/hooks/hooks.ts";
-import MqttGraph from "@/graphs/MqttGraph.tsx";
+import MqttGraph from "@/scene/graphs/MqttGraph.tsx";
 
 function GraphView() {
   const modelParts = useAppSelector((state) => state.modelParts.partIds);

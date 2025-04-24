@@ -1,6 +1,6 @@
 import { Sidebar, SidebarContent } from "@/components/ui/sidebar.tsx";
-import { MainGroup } from "@/sidebar/MainGroup.tsx";
-import { ModelGroup } from "@/sidebar/ModelGroup.tsx";
+import { KeepMeAlive3DGroup } from "@/sidebar/KeepMeAlive3DGroup.tsx";
+import { ModelGroup } from "@/sidebar/model/ModelGroup.tsx";
 import { ModelPartsGroup } from "@/sidebar/ModelPartsGroup.tsx";
 import { Footer } from "@/sidebar/Footer.tsx";
 import { ReplayGroup } from "@/sidebar/replay/ReplayGroup.tsx";
@@ -11,7 +11,7 @@ export function AppSidebar() {
     <Sidebar collapsible="icon">
       <SidebarVersionHeader />
       <SidebarContent>
-        <MainGroup />
+        <KeepMeAlive3DGroup />
         <ModelGroup />
         <ReplayGroup />
         <ModelPartsGroup />
