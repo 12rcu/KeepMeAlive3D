@@ -8,7 +8,7 @@ import Help from "@/scene/Help.tsx";
 import { WebSocketProvider } from "@/service/webSocketProvider.tsx";
 
 function App() {
-  const websocketUrl = import.meta.env.VITE_APP_BASE_URL + "/ws";
+  const websocketUrl = import.meta.env.VITE_APP_BASE_URL ?? window.origin + "/ws";
 
   return (
     <WebSocketProvider url={websocketUrl}>

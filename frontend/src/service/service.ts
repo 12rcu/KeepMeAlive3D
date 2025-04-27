@@ -3,7 +3,7 @@ import { toast } from "@/hooks/use-toast.ts";
 import { RestErrorInfo } from "@/service/error.ts";
 
 const service = axios.create({
-  baseURL: import.meta.env.VITE_APP_BASE_URL,
+  baseURL: import.meta.env.VITE_APP_BASE_URL ?? window.origin,
   timeout: 20_000,
 });
 

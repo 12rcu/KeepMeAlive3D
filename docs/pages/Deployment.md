@@ -1,35 +1,24 @@
 # Deployment
 
-## Provide Services
+If you just want to set up/deploy KMA see the docker [deployment repo](https://github.com/KeepMeAlive3D/docker-deployment).
+
+## Devops notes
 
 ### MySql
 
-Create a mysql db and add the db-migration found
-here [db-migration.sql](https://github.com/KeepMeAlive3D/KeepMeAlive3D/blob/main/backend/run/db-migration.sql).
+Kma uses a mysql db to store meta and event data.
 
 ### Mqtt
 
-Create a mqtt service with a client + password to access topics.
+Kma uses a mqtt server to receive events.
 
 ### Influx
 
-Create an influx db.
+Kma can use Influx to save event data, this is not required
 
-## Clone and build project
+### Build a Docker File
 
-Clone the project from GitHub.
-
-### Edit .env files
-
-In order for the front-end to communicate with the back-end, the front-end needs to know the back-end URL to locate
-the endpoints.
-
-Edit the [.env.production](https://github.com/KeepMeAlive3D/KeepMeAlive3D/blob/main/frontend/.env.production) file so
-that the domain matches the domain you want to deploy to.
-
-### Build Docker File
-
-After all files are edited or created you can build the dockerfile in the project root.
+The dockerfile in the root directory can be used to build your own image
 
 ````shell
 docker build -t <tag>
