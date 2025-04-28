@@ -1,13 +1,13 @@
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/button.tsx";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+} from "@/components/ui/card.tsx";
+import { Input } from "@/components/ui/input.tsx";
+import { Label } from "@/components/ui/label.tsx";
 import { FormEvent, useState } from "react";
 import { loginBasic, registerBasic } from "@/service/login.ts";
 import { Form } from "@/components/ui/form.tsx";

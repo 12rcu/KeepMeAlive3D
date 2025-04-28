@@ -4,11 +4,11 @@ import { Bounds, Grid, OrbitControls, useGLTF } from "@react-three/drei";
 import OutlineObjects from "@/scene/OutlineObjects.tsx";
 import { Light, Object3D, Scene, Vector3 } from "three";
 import { useAppDispatch, useAppSelector } from "@/hooks/hooks.ts";
-import { addPart, clearPartsList } from "@/slices/ModelPartSlice.ts";
-import Animator from "@/scene/Animator.tsx";
+import { addPart, clearPartsList } from "@/redux/slices/ModelPartSlice.ts";
+import Animator from "@/scene/animations/Animator.tsx";
 import { pullLimitsUp } from "@/util/LimitUtils.ts";
-import { useWindowResizeDelta } from "@/hooks/useWindowResizeDelta.tsx";
-import { setLight } from "@/slices/SettingsSlice";
+import { useWindowResizeDelta } from "@/hooks/use-window-resize-delta.tsx";
+import { setLight } from "@/redux/slices/SettingsSlice";
 
 function DynamicModel({ objectUrl }: { objectUrl: string }) {
   const gltf = useGLTF(objectUrl, undefined, true);
@@ -81,6 +81,7 @@ function DynamicModel({ objectUrl }: { objectUrl: string }) {
   };
 
   return (
+    // Manually set the size of the container of the canvas to avoid the bug with the canvas not shrinking on window shrinking
     <div
       style={{
         height: size.height === 0 ? "100%" : `${size.height - 2}px`,

@@ -1,4 +1,5 @@
 import { Object3D, Quaternion, Scene, Vector3 } from "three";
+import { roundQuaternionInPlace } from "@/util/QuaternionUtils.ts";
 
 /**
  * Sets the parents of the empty limit objects of currentObject to the parent
@@ -61,6 +62,11 @@ function getRotationByLimits(
 
   upperLimit.getWorldQuaternion(upperWorldRotation);
   lowerLimit.getWorldQuaternion(lowerWorldRotation);
+
+  // For some reason the quaternions are not super precise in threejs. Therefore,
+  // it is required to round them to the 4th digit.
+  roundQuaternionInPlace(upperWorldRotation);
+  roundQuaternionInPlace(lowerWorldRotation);
 
   const step = lowerWorldRotation.clone().slerp(upperWorldRotation, percentage);
 

@@ -3,18 +3,20 @@ import { Suspense, useEffect, useState } from "react";
 import { downloadModel } from "@/service/upload.ts";
 import { useLocation, useParams } from "react-router";
 import { useAppDispatch } from "@/hooks/hooks.ts";
-import { fetchAndSetModelSettings } from "@/slices/SettingsSlice.ts";
+import { fetchAndSetModelSettings } from "@/redux/slices/SettingsSlice.ts";
 import { LoadingSpinner } from "@/components/custom/loading-spinner.tsx";
 import ReplayIndicator from "@/components/custom/replay-indicator.tsx";
 
-function Edit() {
+function ModelLoader() {
   const [modelUrl, setModelUrl] = useState<string | undefined>(undefined);
   const [loading, setLoading] = useState<boolean>(true);
   const { modelId } = useParams();
   const dispatch = useAppDispatch();
   const location = useLocation();
+  // Used to load new model if URL is changed manually
   const refresh = location.state?.refresh;
 
+  // Fetch model and model settings
   useEffect(() => {
     if (modelId !== undefined) {
       setLoading(true);
@@ -28,6 +30,7 @@ function Edit() {
     }
   }, [dispatch, modelId, refresh]);
 
+  // Display loading indicator or if ready, the model
   if (loading) {
     return (
       <div className="flex flex-row items-center justify-center">
@@ -52,4 +55,4 @@ function Edit() {
   }
 }
 
-export default Edit;
+export default ModelLoader;

@@ -8,6 +8,21 @@ import {
   MessageType,
 } from "@/service/wsTypes.ts";
 
+/**
+ * The `useFilteredWebsocket` hook establishes a WebSocket connection and subscribes to specific topics.
+ * It listens for messages of a specified type and invokes a callback when such messages are received.
+ *
+ * @template Type - The type of the WebSocket message expected.
+ * @param topicsArg - An array of topics to subscribe to.
+ * @param messageType - The type of message to filter and handle.
+ * @param onMessage - A callback function to handle messages of the specified type.
+ *
+ * Features:
+ * - Automatically subscribes to the provided topics upon connection.
+ * - Filters incoming messages by the specified `messageType`.
+ * - Displays error messages using the `useToast` hook if an error message is received.
+ * - Cleans up the WebSocket connection when the component unmounts.
+ */
 function useFilteredWebsocket<Type extends GenericEventMessage>(
   topicsArg: Array<string>,
   messageType: MessageType,
@@ -25,6 +40,7 @@ function useFilteredWebsocket<Type extends GenericEventMessage>(
   useEffect(() => {
     let websocketConnection: WebSocket | undefined = undefined;
     createWebsocket().then((ws) => {
+      // Create subscription messages
       const subscriptions = topics.current.map((topic) => {
         return {
           manifest: {
@@ -42,6 +58,7 @@ function useFilteredWebsocket<Type extends GenericEventMessage>(
 
       websocketConnection = ws;
 
+      // Subscribe to the topics
       subscriptions.forEach((subscription) => {
         ws.send(JSON.stringify(subscription));
       });
@@ -63,16 +80,26 @@ function useFilteredWebsocket<Type extends GenericEventMessage>(
             description: error.message.message.toString(),
           });
         } else if (msgType === messageType) {
+          // Call callback function with the parsed message
           onMessage(jsonMsg as Type);
         }
       };
     });
+    // Cleanup -> close socket
     return () => {
       websocketConnection?.close();
     };
   }, [messageType, onMessage, toast, topics]);
 }
 
+/**
+ * Helper function to compare two arrays for equality.
+ * Arrays are considered equal if they have the same elements, regardless of order.
+ *
+ * @param arr1 - The first array to compare.
+ * @param arr2 - The second array to compare.
+ * @returns `true` if the arrays are equal, otherwise `false`.
+ */
 function areArraysEqual(arr1: string[], arr2: string[]): boolean {
   return (
     arr1.length === arr2.length &&

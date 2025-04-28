@@ -1,6 +1,10 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { RootState } from "@/store.ts";
+import { RootState } from "@/redux/store.ts";
 
+/**
+ * The objectId of the currently outline object. Undefined if no object is
+ * outlined.
+ */
 interface OutlineState {
   id?: number;
 }

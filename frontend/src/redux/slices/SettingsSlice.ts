@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { RootState } from "@/store.ts";
+import { RootState } from "@/redux/store.ts";
 import { getModelSettings, ModelSetting } from "@/service/upload.ts";
 
 export const fetchAndSetModelSettings = createAsyncThunk(
@@ -10,20 +10,20 @@ export const fetchAndSetModelSettings = createAsyncThunk(
       const setting: ModelSetting = response.data;
       return setting;
     } catch {
-      //unused, user can set this himself in case of an error
       console.error(`Could not load settings`);
       return thunkAPI.rejectWithValue("Failed to get model setting");
     }
   }
 );
 
-// Define a type for the slice state
+/**
+ * The settings of a model. Are applied in the Canvas.
+ */
 interface SettingsState {
   light: number;
   scale: number;
 }
 
-// Define the initial state using that type
 const initialState: SettingsState = {
   light: 1,
   scale: 1,
@@ -31,7 +31,6 @@ const initialState: SettingsState = {
 
 export const settingsSlice = createSlice({
   name: "settings",
-  // `createSlice` will infer the state type from the `initialState` argument
   initialState,
   reducers: {
     setLight: (state, action: PayloadAction<number>) => {
@@ -51,7 +50,6 @@ export const settingsSlice = createSlice({
 
 export const { setLight, setScale } = settingsSlice.actions;
 
-// Other code such as selectors can use the imported `RootState` type
 export const selectSettings = (state: RootState) => state.settings;
 
 export type { SettingsState };

@@ -9,7 +9,7 @@ import {
 import { Home, LineChartIcon } from "lucide-react";
 import { Link } from "react-router";
 
-export function MainGroup() {
+export function KeepMeAlive3DGroup() {
   return (
     <SidebarGroup>
       <SidebarGroupLabel>KeepMeAlive3D</SidebarGroupLabel>

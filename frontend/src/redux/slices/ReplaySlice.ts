@@ -1,6 +1,10 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { RootState } from "@/store.ts";
+import { RootState } from "@/redux/store.ts";
 
+/**
+ * Represents a replay. startedOn is the time the replayed got started.
+ * Start and End indicate the time frame of the replay.
+ */
 interface ReplayState {
   running: boolean;
   startedOn?: number;

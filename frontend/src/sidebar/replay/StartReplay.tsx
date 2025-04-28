@@ -17,7 +17,7 @@ import { Button } from "@/components/ui/button.tsx";
 import { useWebSocket } from "@/service/webSocketProvider.tsx";
 import { Manifest, MessageType, ReplayStart } from "@/service/wsTypes.ts";
 import { useAppDispatch } from "@/hooks/hooks.ts";
-import { updateReplay } from "@/slices/ReplaySlice.ts";
+import { updateReplay } from "@/redux/slices/ReplaySlice.ts";
 import { toast } from "@/hooks/use-toast.ts";
 
 export function StartReplay() {

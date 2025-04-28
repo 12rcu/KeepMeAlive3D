@@ -5,6 +5,11 @@ import {
 } from "@/service/wsTypes.ts";
 import { useAppSelector } from "@/hooks/hooks.ts";
 
+/**
+ * Local publisher that can be used to debug. It removes the need to publish messages on mqtt.
+ * It call the animationCallback with a message that has the same structure as the one received from mqtt.
+ * @param animationCallback Called with the message
+ */
 export default function Publisher(
   animationCallback: (msg: RelativePositionEventMessage) => void
 ) {
@@ -32,6 +37,7 @@ export default function Publisher(
       }
     }
 
+    // Adjust topics here
     run("rot.drehkranz_oben001");
     run("move.querausleger");
   }, [modelParts]);

@@ -12,10 +12,10 @@ import {
   OutlineState,
   selectOutline,
   setOutlinedObject,
-} from "@/slices/OutlineSlice.ts";
-import { ModelPartState } from "@/slices/ModelPartSlice";
-import { ReplayState } from "@/slices/ReplaySlice";
-import { SettingsState } from "@/slices/SettingsSlice";
+} from "@/redux/slices/OutlineSlice.ts";
+import { ModelPartState } from "@/redux/slices/ModelPartSlice";
+import { ReplayState } from "@/redux/slices/ReplaySlice";
+import { SettingsState } from "@/redux/slices/SettingsSlice";
 import { ThunkDispatch, UnknownAction, Dispatch } from "@reduxjs/toolkit";
 
 function OutlineObjects() {

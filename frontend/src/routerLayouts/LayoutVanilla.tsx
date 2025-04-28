@@ -1,5 +1,8 @@
 import { Outlet } from "react-router";
 
+/**
+ * Layout without sidebar
+ */
 function LayoutVanilla() {
   return (
     <main className="w-full">

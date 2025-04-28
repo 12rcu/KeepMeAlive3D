@@ -1,9 +1,10 @@
 import { useAppSelector } from "@/hooks/hooks.ts";
-import MqttGraph from "@/graphs/MqttGraph.tsx";
+import MqttGraph from "@/scene/graphs/MqttGraph.tsx";
 
 function GraphView() {
   const modelParts = useAppSelector((state) => state.modelParts.partIds);
 
+  // Displays for each model part a graph with the topic name
   return (
     <div className="grid grid-cols-2 gap-5 p-5">
       {modelParts

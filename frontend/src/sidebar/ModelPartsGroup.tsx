@@ -6,7 +6,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar.tsx";
-import { setOutlinedObject } from "@/slices/OutlineSlice.ts";
+import { setOutlinedObject } from "@/redux/slices/OutlineSlice.ts";
 
 export function ModelPartsGroup() {
   const modelParts = useAppSelector((state) => state.modelParts.partIds);

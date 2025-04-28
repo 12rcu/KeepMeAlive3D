@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/sidebar.tsx";
 import { Settings } from "lucide-react";
 import { Slider } from "@/components/ui/slider.tsx";
-import { setLight, setScale } from "@/slices/SettingsSlice.ts";
+import { setLight, setScale } from "@/redux/slices/SettingsSlice.ts";
 import { useAppDispatch, useAppSelector } from "@/hooks/hooks.ts";
 import { useRef } from "react";
 import { updateModelSettings } from "@/service/upload.ts";
