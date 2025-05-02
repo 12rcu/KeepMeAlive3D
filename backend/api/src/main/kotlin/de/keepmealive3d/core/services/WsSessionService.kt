@@ -49,6 +49,7 @@ class WsSessionService : IWsSessionService, KoinComponent {
         val wsSession = sessions.find { it.uuid.toString() == uuid } ?: return Result.failure(
             EntityNotFoundException("The session could not be found")
         )
+        wsSession.channels.filter { it.topic == topic }.forEach { it.channel.close() }
         wsSession.channels.removeAll { it.topic == topic }
         if(wsSession.channels.isEmpty()) {
             wsSession.replayJob?.cancel()
@@ -115,7 +116,7 @@ class WsSessionService : IWsSessionService, KoinComponent {
             .filter { it.replayState == ReplayState.NOT_IN_REPLAY }
             //in session filter channels for specified topic
             .map {
-                it.channels.filter { it.topic == msg.message.topic }
+                it.channels.filter { c ->  c.topic == msg.message.topic }
             }
             //list of lists to one big list (session independent)
             .flatten()
@@ -123,6 +124,7 @@ class WsSessionService : IWsSessionService, KoinComponent {
             .map { it.channel }
             //send event
             .forEach { channel ->
+                println("WRITING TO CHANNEL : ${channel.hashCode()} ->  ${msg.message.topic}")
                 channel.send(msg)
             }
     }
