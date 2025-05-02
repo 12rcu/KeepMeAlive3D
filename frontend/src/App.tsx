@@ -22,8 +22,8 @@ import { WebSocketProvider } from "@/service/webSocketProvider.tsx";
  * The WebSocket URL is dynamically constructed using the `VITE_APP_BASE_URL` environment variable.
  */
 function App() {
-  const origin = window.origin.replace("http://", "ws://").replace("https://", "ws://");
-  const websocketUrl = (import.meta.env.VITE_APP_BASE_URL ?? origin) + "/ws";
+  const origin = window.origin.replace("http://", "ws://").replace("https://", "wss://");  //use ws protocol instead of http
+  const websocketUrl = (import.meta.env.VITE_APP_BASE_URL ?? origin) + "/ws";              //for dev use the url devined in the .env file, in production use the origin as the url
 
   return (
     <WebSocketProvider url={websocketUrl}>
