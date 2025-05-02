@@ -9,22 +9,17 @@ import de.keepmealive3d.core.model.messages.ReplayStopEvent
 import de.keepmealive3d.core.model.messages.UnknownTypeEvent
 import de.keepmealive3d.core.model.messages.wsCreateErrorEventMessage
 import de.keepmealive3d.core.services.IWsSessionService
-import de.keepmealive3d.core.services.WsSessionService
 import io.ktor.server.application.*
 import io.ktor.server.routing.*
 import io.ktor.server.websocket.*
 import io.ktor.websocket.*
-import jdk.internal.net.http.common.Log.channel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.channels.SendChannel
-import kotlinx.coroutines.launch
 import kotlinx.serialization.json.Json
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
-import org.koin.core.qualifier.qualifier
-import java.util.UUID
 
 class WebsocketConnectionController(application: Application) : KoinComponent {
     private val sessionService: IWsSessionService by inject()
@@ -36,7 +31,7 @@ class WebsocketConnectionController(application: Application) : KoinComponent {
         application.routing {
             webSocket("/ws") {
                 var session: String? = null
-                var topic: String? = null
+                var topics = mutableListOf<String>()
                 for (frame in incoming) {
                     if (frame is Frame.Text) {
                         val text = frame.readText()
@@ -46,7 +41,7 @@ class WebsocketConnectionController(application: Application) : KoinComponent {
                             when (msg.manifest.messageType) {
                                 MessageType.SUBSCRIBE_TOPIC -> {
                                     val event = jsonParser.decodeFromString<SubscribeEvent>(text)
-                                    topic = event.message.topic
+                                    topics.add(event.message.topic)
                                     sessionService.topicSubscribe(event)
                                         .fold({
                                             async(Dispatchers.IO) {
@@ -87,7 +82,9 @@ class WebsocketConnectionController(application: Application) : KoinComponent {
                         }
                     }
                 }
-                sessionService.closeSession(session, topic)
+                topics.forEach {  topic ->
+                    sessionService.closeSession(session, topic)
+                }
             }
         }
     }
