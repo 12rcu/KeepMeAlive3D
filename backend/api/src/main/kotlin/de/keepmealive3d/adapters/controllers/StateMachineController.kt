@@ -22,7 +22,8 @@ class StateMachineController(application: Application) {
                     val stateData = getStateData(
                         scxml.rootNode?.initial,
                         scxml.rootNode?.states ?: listOf(),
-                        scxml.rootNode?.final
+                        scxml.rootNode?.final,
+                        1
                     )
                     call.respond(stateData)
                 }
@@ -30,18 +31,18 @@ class StateMachineController(application: Application) {
         }
     }
 
-    private fun getStateData(initial: String?, states: List<KScxmlState>, final: KScxmlState?): MutableList<StateData> {
+    private fun getStateData(initial: String?, states: List<KScxmlState>, final: KScxmlState?, recursionDepth: Int): MutableList<StateData> {
         val stateData = mutableListOf<StateData>()
 
         if (states.isEmpty()) {
             return stateData
         }
 
-        states.forEach { state ->
+        states.forEachIndexed { index, state ->
             val lStateData = StateData(
                 state.id ?: "df",
-                0L,
-                0L,
+                100 + index * 200,
+                300 + recursionDepth * 10,
                 state.transitions.mapNotNull { it.target }.toMutableList()
             )
             if (initial != null && state.id == initial) {
@@ -51,7 +52,7 @@ class StateMachineController(application: Application) {
             }
 
             state.states.let { innerStates ->
-                stateData.addAll(getStateData(state.initial, innerStates, state.final))
+                stateData.addAll(getStateData(state.initial, innerStates, state.final, recursionDepth + 2))
             }
         }
 

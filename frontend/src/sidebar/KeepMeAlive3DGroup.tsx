@@ -6,7 +6,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar.tsx";
-import { Home, LineChartIcon } from "lucide-react";
+import { GitCompareArrows, Home, LineChartIcon } from "lucide-react";
 import { Link } from "react-router";
 
 export function KeepMeAlive3DGroup() {
@@ -30,6 +30,14 @@ export function KeepMeAlive3DGroup() {
               <Link to="/graphs" target="_blank">
                 <LineChartIcon />
                 <span>Graphs</span>
+              </Link>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+          <SidebarMenuItem key="StateMachine">
+            <SidebarMenuButton asChild>
+              <Link to="/state-machine">
+                <GitCompareArrows />
+                <span>State Machine</span>
               </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>

@@ -6,6 +6,7 @@ import LayoutSidebar from "@/routerLayouts/LayoutSidebar.tsx";
 import LayoutVanilla from "@/routerLayouts/LayoutVanilla.tsx";
 import Help from "@/scene/Help.tsx";
 import { WebSocketProvider } from "@/service/webSocketProvider.tsx";
+import { StateMachineDisplay } from "@/scene/stateMachine/StateMachineDisplay.tsx";
 
 /**
  * The `App` component serves as the main entry point for the application.
@@ -34,6 +35,9 @@ function App() {
         </Route>
         <Route path="/graphs" element={<LayoutVanilla />}>
           <Route path="/graphs" element={<GraphView></GraphView>} />
+        </Route>
+        <Route path="/state-machine" element={<LayoutSidebar />}>
+          <Route path="/state-machine" element={<StateMachineDisplay />} />
         </Route>
       </Routes>
     </WebSocketProvider>
