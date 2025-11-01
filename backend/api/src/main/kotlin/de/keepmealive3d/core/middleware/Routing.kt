@@ -23,7 +23,7 @@ fun Application.configureRouting() {
         swaggerUI("/swagger", "openapi/documentation.yaml") {}
         singlePageApplication {
             useResources = true
-            react("dist")
+            react("static")
         }
     }
 }
