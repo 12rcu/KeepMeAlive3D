@@ -1,4 +1,4 @@
-package de.keepmealive3d.adapters.model
+package de.keepmealive3d.adapters.controllers
 
 import de.keepmealive3d.adapters.data.AvailableFiles
 import de.keepmealive3d.adapters.data.ModelSettings

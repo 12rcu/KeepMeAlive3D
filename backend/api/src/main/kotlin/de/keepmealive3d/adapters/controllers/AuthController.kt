@@ -1,4 +1,4 @@
-package de.keepmealive3d.adapters.auth
+package de.keepmealive3d.adapters.controllers
 
 import de.keepmealive3d.adapters.serializer.UnixTimeSerializer
 import de.keepmealive3d.adapters.sql.KmaSqlDatabase

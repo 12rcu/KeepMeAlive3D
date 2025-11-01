@@ -1,13 +1,15 @@
-package de.keepmealive3d.adapters.event
+package de.keepmealive3d.adapters.controllers
 
 import de.keepmealive3d.adapters.sql.EventDao
 import de.keepmealive3d.core.auth.KmaUserPrincipal
 import de.keepmealive3d.core.exceptions.BadRequestDataException
 import de.keepmealive3d.core.exceptions.InvalidAuthTokenException
-import io.ktor.server.application.*
-import io.ktor.server.auth.*
-import io.ktor.server.response.*
-import io.ktor.server.routing.*
+import io.ktor.server.application.Application
+import io.ktor.server.auth.authenticate
+import io.ktor.server.auth.principal
+import io.ktor.server.response.respond
+import io.ktor.server.routing.get
+import io.ktor.server.routing.routing
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 

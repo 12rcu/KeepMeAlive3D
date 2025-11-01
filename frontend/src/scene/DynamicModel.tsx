@@ -17,7 +17,7 @@ function DynamicModel({ objectUrl }: { objectUrl: string }) {
 
   const initialised = useRef(false);
 
-  const containerRef: RefObject<HTMLDivElement> = useRef(null);
+  const containerRef: RefObject<HTMLDivElement | null> = useRef(null);
   const [size, setSize] = useState({ width: 0, height: 0 });
 
   // This fixes the bug with the canvas not shrinking on window shrinking

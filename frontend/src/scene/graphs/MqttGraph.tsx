@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { type ChartConfig, ChartContainer } from "@/components/ui/chart.tsx";
 import { CartesianGrid, Line, LineChart, XAxis, YAxis } from "recharts";
-import { DataPointEventMessage, MessageType } from "@/service/wsTypes.ts";
+import { type DataPointEventMessage, MessageType } from "@/service/wsTypes.ts";
 import useFilteredWebsocket from "@/hooks/use-filtered-websocket.tsx";
 import { getEventDataPointsOfTopic } from "@/service/model_datapoint.ts";
 import { format } from "date-fns";

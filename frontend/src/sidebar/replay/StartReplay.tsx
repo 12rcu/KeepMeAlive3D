@@ -15,10 +15,10 @@ import { DateTimePicker24h } from "@/components/custom/date-time-picker-24h.tsx"
 import { useState } from "react";
 import { Button } from "@/components/ui/button.tsx";
 import { useWebSocket } from "@/service/webSocketProvider.tsx";
-import { Manifest, MessageType, ReplayStart } from "@/service/wsTypes.ts";
+import { type Manifest, MessageType, type ReplayStart } from "@/service/wsTypes.ts";
 import { useAppDispatch } from "@/hooks/hooks.ts";
 import { updateReplay } from "@/redux/slices/ReplaySlice.ts";
-import { toast } from "@/hooks/use-toast.ts";
+import { toast } from "sonner";
 
 export function StartReplay() {
   const [startDate, setStartDate] = useState<Date | undefined>(undefined);
@@ -38,29 +38,23 @@ export function StartReplay() {
 
   function onStart() {
     if (!startDate || !endDate) {
-      toast({
-        variant: "destructive",
-        title: "Start and End required",
-        description: "Please enter start and date.",
-      });
+      toast.error("Start and End required", {
+        description: "Please enter start and date."
+      })
       return;
     }
 
     if (startDate.getTime() > endDate.getTime()) {
-      toast({
-        variant: "destructive",
-        title: "Start must be before end",
-        description: "Please enter a start date before the end date.",
-      });
+      toast.error("Start must be before end", {
+        description: "Please enter a start date before the end date."
+      })
       return;
     }
 
     if (startDate.getTime() > Date.now()) {
-      toast({
-        variant: "destructive",
-        title: "Start must be in the past",
-        description: "Please enter a start date in the past.",
-      });
+      toast.error("Start must be in the past", {
+        description: "Please enter a start date in the past."
+      })
       return;
     }
 

@@ -1,13 +1,14 @@
 package de.keepmealive3d
 
-import de.keepmealive3d.adapters.auth.AuthController
-import de.keepmealive3d.adapters.auth.RegisterController
-import de.keepmealive3d.adapters.auth.UserController
-import de.keepmealive3d.adapters.event.EventController
-import de.keepmealive3d.adapters.model.ModelDeleteController
-import de.keepmealive3d.adapters.model.ModelDownloadController
-import de.keepmealive3d.adapters.model.ModelInfoController
-import de.keepmealive3d.adapters.model.UploadController
+import de.keepmealive3d.adapters.controllers.AuthController
+import de.keepmealive3d.adapters.controllers.RegisterController
+import de.keepmealive3d.adapters.controllers.UserController
+import de.keepmealive3d.adapters.controllers.EventController
+import de.keepmealive3d.adapters.controllers.ModelDeleteController
+import de.keepmealive3d.adapters.controllers.ModelDownloadController
+import de.keepmealive3d.adapters.controllers.ModelInfoController
+import de.keepmealive3d.adapters.controllers.StateMachineController
+import de.keepmealive3d.adapters.controllers.UploadController
 import de.keepmealive3d.adapters.sql.migrations.MigrationRunner
 import de.keepmealive3d.adapters.ws.WebsocketConnectionController
 import de.keepmealive3d.config.Config
@@ -15,8 +16,6 @@ import de.keepmealive3d.core.auth.JWT
 import de.keepmealive3d.core.auth.OAuth
 import de.keepmealive3d.core.model.messages.GenericMessageEvent
 import de.keepmealive3d.core.middleware.*
-import de.keepmealive3d.core.services.IWsSessionService
-import de.keepmealive3d.core.services.WsSessionService
 import de.keepmealive3d.scriptingapi.Loader
 import de.keepmealive3d.scriptingapi.PluginConfig
 import de.keepmealive3d.scriptingapi.mqtt.MqttPlugin
@@ -69,4 +68,6 @@ fun Application.appModule(config: Config = Config.load(File("config.yml")).getOr
     ModelDownloadController(this)
     ModelDeleteController(this)
     EventController(this)
+
+    StateMachineController(this)
 }

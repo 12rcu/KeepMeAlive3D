@@ -1,10 +1,10 @@
 import { createWebsocket } from "@/service/wsService.ts";
 import { useEffect, useRef } from "react";
-import { useToast } from "@/hooks/use-toast.ts";
+import { toast } from "sonner";
 import {
-  EventError,
-  EventSubscribe,
-  GenericEventMessage,
+  type EventError,
+  type EventSubscribe,
+  type GenericEventMessage,
   MessageType,
 } from "@/service/wsTypes.ts";
 
@@ -28,7 +28,6 @@ function useFilteredWebsocket<Type extends GenericEventMessage>(
   messageType: MessageType,
   onMessage: (msg: Type) => void
 ) {
-  const { toast } = useToast();
 
   const topics = useRef<string[]>([]);
 
@@ -74,11 +73,9 @@ function useFilteredWebsocket<Type extends GenericEventMessage>(
 
           console.error(error.message.message.toString());
 
-          toast({
-            variant: "destructive",
-            title: "Error",
-            description: error.message.message.toString(),
-          });
+          toast.error("Error", {
+            description: error.message.message.toString()
+          })
         } else if (msgType === messageType) {
           // Call callback function with the parsed message
           onMessage(jsonMsg as Type);
@@ -89,7 +86,7 @@ function useFilteredWebsocket<Type extends GenericEventMessage>(
     return () => {
       websocketConnection?.close();
     };
-  }, [messageType, onMessage, toast, topics]);
+  }, [messageType, onMessage, topics]);
 }
 
 /**

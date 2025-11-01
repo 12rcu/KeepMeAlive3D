@@ -1,4 +1,4 @@
-package de.keepmealive3d.adapters.model
+package de.keepmealive3d.adapters.controllers
 
 import de.keepmealive3d.core.auth.KmaUserPrincipal
 import de.keepmealive3d.core.exceptions.BadRequestDataException
