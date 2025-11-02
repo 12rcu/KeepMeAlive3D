@@ -25,7 +25,7 @@ class StateMachineController(application: Application) {
                         scxml.rootNode?.initial,
                         scxml.rootNode?.states ?: listOf(),
                         scxml.rootNode?.final,
-                        1
+                        0
                     )
                     call.respond(stateData)
                 }
@@ -49,7 +49,7 @@ class StateMachineController(application: Application) {
             val lStateData = StateData(
                 state.id ?: "df",
                 100 + index * 200,
-                300 + recursionDepth * 10,
+                100 + recursionDepth * 100,
                 state.transitions.mapNotNull { it.target }.toMutableList(),
                 StateInfoDetails(
                     initial = state.initial,

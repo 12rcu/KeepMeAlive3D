@@ -4,7 +4,7 @@ import { Circle, Arrow } from "react-konva";
 import Konva from "konva";
 import { getStateMachineForDT } from "@/service/stateMachine/stateMachine.ts";
 
-export function StateMachineGraph({ setLoading, setInspectState, inspectState}: {
+export function StateMachineGraph({ setLoading, setInspectState, inspectState }: {
   setLoading: (value: boolean) => void,
   setInspectState: (value: StateData) => void,
   inspectState: StateData | undefined
@@ -27,16 +27,16 @@ export function StateMachineGraph({ setLoading, setInspectState, inspectState}: 
 
   const getConnectorPoints = (from: StateData, to: StateData) => {
     const dx = to.posX - from.posX;
-    const dy = to.poxY - from.poxY;
+    const dy = to.posY - from.posY;
     const angle = Math.atan2(-dy, dx);
 
     const radius = 30;
 
     return [
       from.posX + -radius * Math.cos(angle + Math.PI),
-      from.poxY + radius * Math.sin(angle + Math.PI),
+      from.posY + radius * Math.sin(angle + Math.PI),
       to.posX + -radius * Math.cos(angle),
-      to.poxY + radius * Math.sin(angle),
+      to.posY + radius * Math.sin(angle),
     ];
   };
 
@@ -47,7 +47,7 @@ export function StateMachineGraph({ setLoading, setInspectState, inspectState}: 
     setStates(
       states.map((state) =>
         "node" + state.id === e.target.id()
-          ? { ...state, posX: e.target.x(), poxY: e.target.y() }
+          ? { ...state, posX: e.target.x(), posY: e.target.y() }
           : state,
       ),
     );
@@ -59,7 +59,7 @@ export function StateMachineGraph({ setLoading, setInspectState, inspectState}: 
 
   const getInitialState = (state: StateData) => {
     return states.find(it => it.id === state.details.initial);
-  }
+  };
 
   return (
     <>
@@ -71,7 +71,7 @@ export function StateMachineGraph({ setLoading, setInspectState, inspectState}: 
                 key={"node" + state.id}
                 id={"node" + state.id}
                 x={state.posX}
-                y={state.poxY}
+                y={state.posY}
                 draggable
                 stroke="#737373FF"
                 fill="#171717FF"
@@ -79,7 +79,7 @@ export function StateMachineGraph({ setLoading, setInspectState, inspectState}: 
                 onClick={it => handleOnClickState(it, state)}
                 radius={30}
                 shadowBlur={10}
-                shadowOpacity={ (inspectState?.id !== undefined && inspectState.id === state.id) ? 0.7 : 0 }
+                shadowOpacity={(inspectState?.id !== undefined && inspectState.id === state.id) ? 0.7 : 0}
                 shadowColor="#2F6DFF"
               />
               {

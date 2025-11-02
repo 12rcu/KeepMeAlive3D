@@ -1,7 +1,7 @@
 export interface StateData {
   id: string
   posX: number
-  poxY: number
+  posY: number
   connectedTo: string[],
   details: StateInfoDetails
 }
