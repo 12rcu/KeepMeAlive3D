@@ -1,5 +1,5 @@
 import { Canvas } from "@react-three/fiber";
-import { RefObject, Suspense, useRef, useState } from "react";
+import { type RefObject, Suspense, useRef, useState } from "react";
 import { Bounds, Grid, OrbitControls, useGLTF } from "@react-three/drei";
 import OutlineObjects from "@/scene/OutlineObjects.tsx";
 import { Light, Object3D, Scene, Vector3 } from "three";
