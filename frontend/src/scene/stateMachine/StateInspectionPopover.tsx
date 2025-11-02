@@ -28,10 +28,10 @@ export function StateInspectionPopover({ inspectState, setInspectState }: {
         <CardContent>
           <div className="flex flex-col items-center gap-2">
             <div className="flex w-full flex-wrap gap-2">
-              {inspectState.details.onEntry ? <Badge variant="secondary">OnEntry</Badge> : null}
-              {inspectState.details.onExit ? <Badge variant="secondary">OnExit</Badge> : null}
+              {inspectState.details.onEntry ? <Badge>OnEntry</Badge> : null}
+              {inspectState.details.onExit ? <Badge>OnExit</Badge> : null}
               {inspectState.details.initial ?
-                <Badge variant="secondary">Initial State | {inspectState.details.initial}</Badge> : null}
+                <Badge>Initial State | {inspectState.details.initial}</Badge> : null}
             </div>
           </div>
           {(inspectState.details.transitions !== undefined && inspectState.details.transitions.length > 0) ?

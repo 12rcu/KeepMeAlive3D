@@ -4,9 +4,9 @@ import GraphView from "@/scene/graphs/GraphView.tsx";
 import { Route, Routes } from "react-router";
 import LayoutSidebar from "@/routerLayouts/LayoutSidebar.tsx";
 import LayoutVanilla from "@/routerLayouts/LayoutVanilla.tsx";
-import Help from "@/scene/Help.tsx";
 import { WebSocketProvider } from "@/service/webSocketProvider.tsx";
 import { StateMachineDisplay } from "@/scene/stateMachine/StateMachineDisplay.tsx";
+import { DigitalTwinsOverview } from "@/scene/home/DigitalTwinsOverview.tsx";
 
 /**
  * The `App` component serves as the main entry point for the application.
@@ -30,7 +30,7 @@ function App() {
     <WebSocketProvider url={websocketUrl}>
       <Routes>
         <Route path="/" element={<LayoutSidebar />}>
-          <Route path="/" element={<Help />} />
+          <Route path="/" element={<DigitalTwinsOverview />} />
           <Route path="/model/:modelId" element={<ModelLoader />} />
         </Route>
         <Route path="/graphs" element={<LayoutVanilla />}>

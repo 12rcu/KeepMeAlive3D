@@ -7,16 +7,18 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar.tsx";
 import { GitCompareArrows, Home, LineChartIcon } from "lucide-react";
-import { Link } from "react-router";
+import { Link, useLocation } from "react-router";
 
 export function KeepMeAlive3DGroup() {
+  const location = useLocation();
+
   return (
     <SidebarGroup>
       <SidebarGroupLabel>KeepMeAlive3D</SidebarGroupLabel>
       <SidebarGroupContent>
         <SidebarMenu>
           <SidebarMenuItem key="Home">
-            <SidebarMenuButton asChild>
+            <SidebarMenuButton asChild isActive={location.pathname == "/"}>
               <a href="/">
                 <Home />
                 <span>Home</span>
@@ -34,7 +36,7 @@ export function KeepMeAlive3DGroup() {
             </SidebarMenuButton>
           </SidebarMenuItem>
           <SidebarMenuItem key="StateMachine">
-            <SidebarMenuButton asChild>
+            <SidebarMenuButton asChild isActive={location.pathname == "/state-machine"}>
               <Link to="/state-machine">
                 <GitCompareArrows />
                 <span>State Machine</span>

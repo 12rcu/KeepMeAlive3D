@@ -79,8 +79,8 @@ export function StateMachineGraph({ setLoading, setInspectState, inspectState }:
                 onClick={it => handleOnClickState(it, state)}
                 radius={30}
                 shadowBlur={10}
-                shadowOpacity={(inspectState?.id !== undefined && inspectState.id === state.id) ? 0.7 : 0}
-                shadowColor="#2F6DFF"
+                shadowOpacity={(inspectState?.id !== undefined && inspectState.id === state.id) ? 0.5 : 0}
+                shadowColor="#22c55e"
               />
               {
                 state.connectedTo.map(toStateId => {
