@@ -4,7 +4,11 @@ import { Circle, Arrow } from "react-konva";
 import Konva from "konva";
 import { getStateMachineForDT } from "@/service/stateMachine/stateMachine.ts";
 
-export function StateMachineGraph({ setLoading }: { setLoading: (value: boolean) => void }) {
+export function StateMachineGraph({ setLoading, setInspectState, inspectState}: {
+  setLoading: (value: boolean) => void,
+  setInspectState: (value: StateData) => void,
+  inspectState: StateData | undefined
+}) {
   const [states, setStates] = useState<StateData[]>([]);
 
   useEffect(() => {
@@ -16,7 +20,6 @@ export function StateMachineGraph({ setLoading }: { setLoading: (value: boolean)
     try {
       const response = await getStateMachineForDT("1", "A");
       setStates(response.data);
-      console.debug(`fetched data:`, response.data)
     } finally {
       setLoading(false);
     }
@@ -50,6 +53,14 @@ export function StateMachineGraph({ setLoading }: { setLoading: (value: boolean)
     );
   };
 
+  const handleOnClickState = (_e: Konva.KonvaEventObject<MouseEvent>, state: StateData) => {
+    setInspectState(state);
+  };
+
+  const getInitialState = (state: StateData) => {
+    return states.find(it => it.id === state.details.initial);
+  }
+
   return (
     <>
       {
@@ -65,7 +76,11 @@ export function StateMachineGraph({ setLoading }: { setLoading: (value: boolean)
                 stroke="#737373FF"
                 fill="#171717FF"
                 onDragMove={handleDragMove}
+                onClick={it => handleOnClickState(it, state)}
                 radius={30}
+                shadowBlur={10}
+                shadowOpacity={ (inspectState?.id !== undefined && inspectState.id === state.id) ? 0.7 : 0 }
+                shadowColor="#2F6DFF"
               />
               {
                 state.connectedTo.map(toStateId => {
@@ -81,6 +96,17 @@ export function StateMachineGraph({ setLoading }: { setLoading: (value: boolean)
                     />
                   );
                 })
+              }
+              {
+                getInitialState(state) !== undefined ?
+                  <Arrow
+                    key={`arrow${state.id}-initial`}
+                    id={`arrow${state.id}-initial`}
+                    points={getConnectorPoints(state, getInitialState(state)!)}
+                    fill="red"
+                    stroke="red"
+                  />
+                  : null
               }
             </>
           );

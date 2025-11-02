@@ -1,33 +1,20 @@
 export interface StateData {
-    id: string
-    posX: number
-    poxY: number
-    connectedTo: string[]
+  id: string
+  posX: number
+  poxY: number
+  connectedTo: string[],
+  details: StateInfoDetails
 }
 
-export const sampleFsm : StateData[] = [
-    {
-        id: "1",
-        posX: 100,
-        poxY: 200,
-        connectedTo: ["2","3"]
-    },
-    {
-        id: "2",
-        posX: 500,
-        poxY: 100,
-        connectedTo: ["4"]
-    },
-    {
-        id: "3",
-        posX: 200,
-        poxY: 600,
-        connectedTo: ["2"]
-    },
-    {
-        id: "4",
-        posX: 400,
-        poxY: 600,
-        connectedTo: []
-    }
-]
+export interface StateInfoDetails {
+  initial: string | undefined,
+  onEntry: boolean,
+  onExit: boolean,
+  transitions: StateTransitionsDetails[]
+}
+
+export interface StateTransitionsDetails {
+  toState: string | undefined,
+  event: string | undefined,
+  condition: string | undefined
+}
